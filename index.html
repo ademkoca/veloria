@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Race registration</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%23c8290f%27/%3E%3Cpath d=%27M8 22h16M8 16h10M8 10h16%27 stroke=%27%23f2f0eb%27 stroke-width=%273%27/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="js/config.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/countdown.js" defer></script>
+  <script src="js/carousel.js" defer></script>
+  <script src="js/modal.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header -->
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="wordmark" href="#top" data-bind="event.name"></a>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="#details">Details</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="btn btn--sm" type="button" data-register>
+        <span data-register-label data-bind="copy.registerCta"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero on-dark" id="top" aria-labelledby="hero-title">
+      <div class="hero__media" data-hero-media></div>
+
+      <div class="container hero__inner">
+        <p class="label hero__eyebrow">
+          <span data-bind="event.edition"></span> · <span data-bind="event.discipline"></span>
+        </p>
+        <h1 class="hero__title" id="hero-title" data-bind="event.name"></h1>
+        <p class="hero__tagline" data-bind="event.tagline"></p>
+
+        <dl class="hero__facts">
+          <div class="fact">
+            <dt class="label">Date</dt>
+            <dd><span data-bind="raceWeekday"></span>, <span data-bind="raceDate"></span></dd>
+          </div>
+          <div class="fact">
+            <dt class="label">Start</dt>
+            <dd><span data-bind="raceTime"></span> <span data-bind="event.timeZoneLabel"></span></dd>
+          </div>
+          <div class="fact fact--wide">
+            <dt class="label">Location</dt>
+            <dd>
+              <span data-bind="event.location.venue"></span>, <span data-bind="event.location.city"></span>
+              <a class="fact__link" data-map-link target="_blank" rel="noopener">Map<span class="sr-only"> (opens in a new tab)</span> ↗</a>
+            </dd>
+          </div>
+        </dl>
+
+        <div class="hero__bottom">
+          <div class="countdown" data-countdown>
+            <p class="label" data-bind="copy.countdownLabel"></p>
+            <div class="countdown__units" aria-hidden="true">
+              <div class="countdown__unit"><span class="countdown__num" data-unit="days">00</span><span class="countdown__lbl">Days</span></div>
+              <div class="countdown__unit"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__lbl">Hours</span></div>
+              <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__lbl">Min</span></div>
+              <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__lbl">Sec</span></div>
+            </div>
+            <p class="sr-only" data-countdown-sr></p>
+            <p class="countdown__meta">
+              Closes <span data-bind="closesDate"></span>, <span data-bind="closesTime"></span> <span data-bind="event.timeZoneLabel"></span>
+            </p>
+          </div>
+          <p class="closed-msg" data-closed-msg hidden data-bind="copy.closedMessage"></p>
+
+          <div class="hero__ctas">
+            <button class="btn btn--lg" type="button" data-register>
+              <span data-register-label data-bind="copy.registerCta"></span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </button>
+            <a class="link-arrow" href="#details"><span data-bind="copy.detailsLink"></span> ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details -->
+    <section class="section" id="details" aria-labelledby="details-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="label section-head__index" data-bind="copy.sections.details.index"></p>
+          <h2 class="section-head__title" id="details-title" data-bind="copy.sections.details.title"></h2>
+          <p class="section-head__lead" data-bind="copy.sections.details.lead"></p>
+        </header>
+        <div class="details" data-details></div>
+      </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="section section--tight-top" id="schedule" aria-labelledby="schedule-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="label section-head__index" data-bind="copy.sections.schedule.index"></p>
+          <h2 class="section-head__title" id="schedule-title" data-bind="copy.sections.schedule.title"></h2>
+          <p class="section-head__lead" data-bind="copy.sections.schedule.lead"></p>
+        </header>
+        <div class="schedule" data-schedule></div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section section--dark on-dark" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="label section-head__index" data-bind="copy.sections.gallery.index"></p>
+          <h2 class="section-head__title" id="gallery-title" data-bind="copy.sections.gallery.title"></h2>
+          <p class="section-head__lead" data-bind="copy.sections.gallery.lead"></p>
+        </header>
+      </div>
+
+      <div class="carousel" data-carousel role="region" aria-roledescription="carousel" aria-labelledby="gallery-title">
+        <div class="carousel__viewport" data-carousel-track tabindex="0" aria-label="Slides. Use the left and right arrow keys to browse."></div>
+
+        <div class="container carousel__controls">
+          <p class="carousel__counter" aria-hidden="true">
+            <span data-carousel-current>01</span><span class="carousel__sep">/</span><span data-carousel-total>01</span>
+          </p>
+          <div class="carousel__dots" data-carousel-dots role="group" aria-label="Choose a slide"></div>
+          <div class="carousel__nav">
+            <button class="icon-btn" type="button" data-carousel-prev aria-label="Previous slide">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 12H5M11 6l-6 6 6 6"/></svg>
+            </button>
+            <button class="icon-btn" type="button" data-carousel-next aria-label="Next slide">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="sr-only" aria-live="polite" aria-atomic="true" data-carousel-status></p>
+      </div>
+    </section>
+
+    <!-- Sign up band -->
+    <section class="band on-dark" id="signup" aria-labelledby="signup-title">
+      <div class="container band__inner">
+        <div class="band__copy">
+          <h2 class="band__title" id="signup-title" data-bind="copy.sections.signup.title"></h2>
+          <p class="band__lead" data-bind="copy.sections.signup.lead"></p>
+        </div>
+
+        <div class="band__aside">
+          <dl class="band__facts">
+            <div class="fact">
+              <dt class="label">Race day</dt>
+              <dd data-bind="raceDate"></dd>
+            </div>
+            <div class="fact">
+              <dt class="label">Entry from</dt>
+              <dd data-bind="feeFrom"></dd>
+            </div>
+          </dl>
+
+          <div class="countdown countdown--compact" data-countdown>
+            <p class="label" data-bind="copy.countdownLabel"></p>
+            <div class="countdown__units" aria-hidden="true">
+              <div class="countdown__unit"><span class="countdown__num" data-unit="days">00</span><span class="countdown__lbl">Days</span></div>
+              <div class="countdown__unit"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__lbl">Hours</span></div>
+              <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__lbl">Min</span></div>
+              <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__lbl">Sec</span></div>
+            </div>
+            <p class="sr-only" data-countdown-sr></p>
+          </div>
+          <p class="closed-msg" data-closed-msg hidden data-bind="copy.closedMessage"></p>
+
+          <button class="btn btn--ink btn--lg" type="button" data-register>
+            <span data-register-label data-bind="copy.signUpCta"></span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsors -->
+    <section class="section section--compact" id="sponsors" aria-labelledby="sponsors-title">
+      <div class="container">
+        <header class="section-head section-head--row">
+          <p class="label section-head__index" data-bind="copy.sections.sponsors.index"></p>
+          <div>
+            <h2 class="section-head__title section-head__title--sm" id="sponsors-title" data-bind="copy.sections.sponsors.title"></h2>
+            <p class="section-head__lead" data-bind="copy.sections.sponsors.lead"></p>
+          </div>
+          <button class="text-btn" type="button" data-marquee-toggle aria-pressed="false">Pause motion</button>
+        </header>
+      </div>
+      <div class="marquee" data-marquee>
+        <div class="marquee__track" data-marquee-track></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--tight-top" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <header class="section-head section-head--stack">
+          <p class="label section-head__index" data-bind="copy.sections.faq.index"></p>
+          <h2 class="section-head__title" id="faq-title" data-bind="copy.sections.faq.title"></h2>
+          <p class="section-head__lead">
+            <span data-bind="copy.sections.faq.lead"></span>
+            <a class="inline-link" data-mailto></a>
+          </p>
+        </header>
+        <div class="faq" data-faq></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer on-dark">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <p class="footer__mark" data-bind="event.name"></p>
+        <p><span data-bind="raceDate"></span> · <span data-bind="event.location.city"></span></p>
+      </div>
+      <div>
+        <p class="label">Venue</p>
+        <address>
+          <span data-bind="event.location.venue"></span><br>
+          <span data-bind="event.location.city"></span>, <span data-bind="event.location.region"></span><br>
+          <span data-bind="event.location.country"></span>
+        </address>
+      </div>
+      <div>
+        <p class="label">Contact</p>
+        <ul class="footer__list">
+          <li><a data-mailto></a></li>
+          <li><a data-tel></a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Follow</p>
+        <ul class="footer__list" data-social></ul>
+      </div>
+    </div>
+    <div class="container footer__base">
+      <p>© <span data-bind="year"></span> <span data-bind="event.organizer"></span></p>
+      <p class="footer__legal"><a data-href="links.terms">Terms</a><a data-href="links.privacy">Privacy</a></p>
+    </div>
+  </footer>
+
+  <!-- Registration modal -->
+  <dialog class="modal" id="register-dialog" aria-labelledby="modal-title">
+    <header class="modal__header">
+      <div>
+        <p class="label"><span data-bind="event.name"></span> · <span data-bind="raceDate"></span></p>
+        <h2 class="modal__title" id="modal-title" data-bind="copy.form.title"></h2>
+      </div>
+      <button class="icon-btn icon-btn--plain" type="button" data-close aria-label="Close registration">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </header>
+
+    <div class="modal__view" data-view="form">
+      <form class="form" novalidate>
+        <div class="modal__body">
+          <p class="form__intro">All fields are required unless marked optional.</p>
+
+          <fieldset class="form__section">
+            <legend class="form__legend"><span class="form__num">01</span>Rider</legend>
+            <div class="form__grid">
+              <div class="field">
+                <label for="f-firstName">First name</label>
+                <input id="f-firstName" name="firstName" type="text" autocomplete="given-name" required aria-describedby="err-firstName">
+                <p class="field__error" id="err-firstName"></p>
+              </div>
+              <div class="field">
+                <label for="f-lastName">Last name</label>
+                <input id="f-lastName" name="lastName" type="text" autocomplete="family-name" required aria-describedby="err-lastName">
+                <p class="field__error" id="err-lastName"></p>
+              </div>
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="err-email">
+                <p class="field__error" id="err-email"></p>
+              </div>
+              <div class="field">
+                <label for="f-phone">Phone</label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+41 79 123 45 67" required aria-describedby="hint-phone err-phone">
+                <p class="field__hint" id="hint-phone">Include your country code.</p>
+                <p class="field__error" id="err-phone"></p>
+              </div>
+              <div class="field">
+                <label for="f-birthDate">Date of birth</label>
+                <input id="f-birthDate" name="birthDate" type="date" autocomplete="bday" required aria-describedby="hint-birthDate err-birthDate">
+                <p class="field__hint" id="hint-birthDate" data-bind="minAgeHint"></p>
+                <p class="field__error" id="err-birthDate"></p>
+              </div>
+              <div class="field">
+                <label for="f-club">Team or club <span class="field__optional">(optional)</span></label>
+                <input id="f-club" name="club" type="text" autocomplete="organization">
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form__section">
+            <legend class="form__legend"><span class="form__num">02</span>Race</legend>
+
+            <fieldset class="group" data-group="category" aria-describedby="err-category">
+              <legend class="group__legend">Distance</legend>
+              <div class="choices" data-options="category"></div>
+              <p class="field__error" id="err-category"></p>
+            </fieldset>
+
+            <fieldset class="group" data-group="shirtSize" aria-describedby="err-shirtSize">
+              <legend class="group__legend">Jersey size</legend>
+              <div class="segmented" data-options="shirtSize"></div>
+              <p class="field__error" id="err-shirtSize"></p>
+            </fieldset>
+          </fieldset>
+
+          <fieldset class="form__section">
+            <legend class="form__legend"><span class="form__num">03</span>Emergency contact</legend>
+            <div class="form__grid">
+              <div class="field">
+                <label for="f-emergencyName">Full name</label>
+                <input id="f-emergencyName" name="emergencyName" type="text" autocomplete="off" required aria-describedby="err-emergencyName">
+                <p class="field__error" id="err-emergencyName"></p>
+              </div>
+              <div class="field">
+                <label for="f-emergencyPhone">Phone</label>
+                <input id="f-emergencyPhone" name="emergencyPhone" type="tel" autocomplete="off" inputmode="tel" required aria-describedby="err-emergencyPhone">
+                <p class="field__error" id="err-emergencyPhone"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="field field--check">
+            <input id="f-terms" name="terms" type="checkbox" required aria-describedby="err-terms">
+            <label for="f-terms">I accept the <a data-href="links.terms" target="_blank" rel="noopener">terms and liability waiver</a>.</label>
+            <p class="field__error" id="err-terms"></p>
+          </div>
+
+          <p class="form__summary" role="alert" data-form-summary></p>
+        </div>
+
+        <footer class="modal__footer">
+          <p class="modal__total"><span class="label">Entry fee</span><strong data-fee-total></strong></p>
+          <button class="btn btn--lg" type="submit" data-submit>
+            <span data-submit-label data-bind="copy.form.submit"></span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+        </footer>
+      </form>
+    </div>
+
+    <div class="modal__view" data-view="success" hidden>
+      <div class="modal__body success">
+        <h3 class="success__title" tabindex="-1" data-success-title></h3>
+        <p class="success__text" data-bind="copy.form.successText"></p>
+        <dl class="success__list" data-success-list></dl>
+      </div>
+      <footer class="modal__footer">
+        <span></span>
+        <button class="btn btn--ink btn--lg" type="button" data-close>Done</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <noscript>
+    <p class="noscript">This page needs JavaScript to show the event details.</p>
+  </noscript>
+</body>
+</html>
